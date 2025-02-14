@@ -841,74 +841,74 @@ paths:
           description: Solicitation not found
       security:
       - sanctum: []
-"/api/client/my-solicitations/{mySolicitationId}/status":
-  post:
-    tags:
+  "/api/client/my-solicitations/{mySolicitationId}/status":
+    post:
+      tags:
       - My Solicitations
-    summary: Update a solicitation status
-    description: Update a current user's solicitation status.
-    operationId: Update a Solicitation Status
-    parameters:
+      summary: Update a solicitation status
+      description: Update a current user's solicitation status.
+      operationId: Update a Solicitation Status
+      parameters:
       - name: mySolicitationId
         in: path
         description: The id of the solicitation
         required: true
         schema:
-          type: integer  # <- Agora está corretamente indentado
-    requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              status:
-                description: The new status of the solicitation
-                type: string
-                default: in_progress
-                enum:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                status:
+                  description: The new status of the solicitation
+                  type: string
+                  default: in_progress
+                  enum:
                   - open
                   - in_progress
                   - resolved
-    responses:
-      '200':
-        description: Successfully updated a solicitation status
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ShowSolicitationResponse"
-      '400':
-        description: Bad request
-        content:
-          application/json:
-            schema:
               type: object
-              properties:
-                message:
-                  type: string
-                  example: Bad request
-      '401':
-        description: Unauthorized
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: Unauthorized
-      '403':
-        description: Forbidden
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ForbiddenResponseExample"
-      '422':
-        description: Unprocessable Entity
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/UnprocessableEntityResponseExample"
-    security:
+      responses:
+        '200':
+          description: Successfully update a solicitation status
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ShowSolicitationResponse"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Bad request
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ForbiddenResponseExample"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UnprocessableEntityResponseExample"
+      security:
       - sanctum: []
   "/api/client/my-user-solicitations/{myUserSolicitationId}/add-image":
     post:
